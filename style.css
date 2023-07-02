@@ -1,0 +1,171 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+:root{
+    /* --b:1px solid #fff;
+    --n:1px solid #000; */
+    --blanco:#fff;
+    --negro:#000;
+    --fondo:#0795F7;
+    --btnParo:#F73107;
+    --contornoReloj:#FDFAFA;
+    --contornoIntReloj:#CCCCCC;
+    --pantalla:#171717;
+    --btnModo:#3F3F3F;
+    --btnIconDesac:rgba(128,128,128,.3);
+    --btnAct:#76FF6E;
+    --patas:#928E8E;
+    --fuente:'Roboto', sans-serif;
+}
+.contMaster{
+    width:100vw;
+    height:100vh;
+    background-color:var(--fondo);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.contenedorReloj{
+    outline:var(--b);
+    width:500px;
+    height:300px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+}
+/*RelojDigital*/
+    /*Parte Botones*/
+        .botoneraModos{
+            outline:var(--n);
+            width:65%;
+            height:15%;
+            display:flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            flex-direction:row;
+        }
+        .btnParo{
+            outline:var(--n);
+            width:45%;
+            height:20%;
+            border-radius:20px 20px 0 0;
+            background-color:var(--btnParo);
+        }
+        .btnAlarma,.btnTempo,.btnReloj{
+            outline:var(--n);
+            border-radius:20px 20px 0 0;
+            width:15%;
+            height:70%;
+            background-color:var(--btnModo);
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            font-size:19px;
+            color:var(--btnIconDesac);
+            position:relative;
+        }
+        .btnAct{
+            position:absolute;
+            width:100%;
+            height:10%;
+            background-color:var(--btnAct);
+            bottom: 0;
+        }
+        .btnTempo{
+
+        }
+        .btnReloj{
+
+        }
+    /*Parte Reloj*/
+        .contornoReloj{
+            border:12px solid var(--contornoReloj);
+            background-color:var(--contornoIntReloj);
+            width:100%;
+            height:60%;
+            border-radius:90px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .pantalla{
+            outline:var(--n);
+            width:95%;
+            height:90%;
+            border-radius:inherit;
+            background-color: var(--pantalla);
+            display:flex;
+        }
+        /*Parte Izq*/
+            .zonaDia{
+                outline:var(--b);
+                width:25%;
+                height:100%;
+                border-radius:90px 0 0 90px;
+                display:flex;
+                flex-direction:column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            .dia{
+                outline:var(--b);
+                width:60%;
+                padding:8px 8px;
+                display:flex;
+                flex-direction:row;
+                justify-content: space-around;
+                align-items: center;
+            }
+            .dia > p{
+                font-family:var(--fuente);
+                letter-spacing: 1px;
+                color:var(--blanco);
+                opacity:.2;
+            }
+            .dia > div{
+                outline:var(--b);
+                width:10px;
+                height:10px;
+                border-radius: 50%;
+                background-color:var(--btnAct);
+                opacity:.2;
+            }
+        /*Parte Drch*/
+            .zonaTiempo{
+                outline:var(--b);
+                width:75%;
+                height:100%;
+                border-radius:0 90px 90px 0;
+            }
+    /*Parte Patas*/
+        .contPatas{
+            outline:var(--n);
+            width:70%;
+            height:10%;
+            display:flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+        .pata{
+            /* outline:var(--n); */
+            width:30%;
+            height:35%;
+            border-radius:0 0 5px 5px;
+            background-color:var(--negro);
+            position:relative;
+            display:flex;
+            justify-content: center;
+        }
+        .pata > div{
+            /* outline:var(--b); */
+            width:100%;
+            height:3px;
+            position:absolute;
+            bottom: 0;
+            border-radius:0 0 50px 50px;
+            background-color:var(--patas);
+        }
