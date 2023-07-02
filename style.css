@@ -4,7 +4,7 @@
     padding: 0;
 }
 :root{
-   /*  --b:1px solid #fff;
+    /* --b:1px solid #fff;
     --n:1px solid #000; */
     --blanco:#fff;
     --negro:#000;
@@ -101,7 +101,7 @@
             display:flex;
         }
         /*Parte Izq*/
-            .zonaDia{
+            .zonaDia,.zonaBotones{
                 outline:var(--b);
                 width:15%;
                 height:100%;
@@ -211,6 +211,30 @@
                 width:15%;
                 height:100%;
                 border-radius:0 90px 90px 0;
+            }
+            .btnSubir,.btnBajar{
+                border:1px solid var(--blanco);
+                width:50%;
+                height:25%;
+                display:flex;
+                border-radius:50%;
+                position:relative;
+                justify-content: center;
+                align-items: center;
+            }
+            .btnSubir{
+                top:-10px;
+            }
+            .btnBajar{
+                bottom: -10px;
+            }
+            .btnB{
+                font-size:35px;
+                color:var(--blanco);
+                opacity:.3;
+            }
+            .btnB:active{
+                opacity:1;
             }
     /*Parte Patas*/
         .contPatas{
