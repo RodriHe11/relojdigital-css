@@ -68,7 +68,7 @@
             color:var(--btnIconDesac);
             position:relative;
         }
-        .btnAlarma,.btnTempo{
+        .btnAlarma,.btnTempo,.btnReloj{
             transform:translateY(4px);
         }
         .btnAct{
@@ -155,7 +155,7 @@
                 border-radius:50px;
                 position:absolute;
                 background-color:var(--numDesc);
-                opacity:.3;
+                opacity:.1;
             }
             .bar1{
                 top:10px;
@@ -201,7 +201,7 @@
                 height:12px;
                 border-radius:5px;
                 background-color:var(--numDesc);
-                opacity:.3
+                opacity:.1
             }
             /*Parte Drch*/
             .zonaBotones{
@@ -265,4 +265,7 @@
 }
 .btnB:active{
     opacity:1;
+}
+.btnImpTemAlar{
+    transform:translateY(0);
 }
