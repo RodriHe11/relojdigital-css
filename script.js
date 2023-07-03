@@ -2,7 +2,9 @@ const btnReloj=document.querySelector(".btnReloj"),
       btnAlarma=document.querySelector(".btnTempo"),
       btnTempo=document.querySelector(".btnAlarma"),
       num=document.querySelectorAll(".num"),
-      puntos=document.querySelectorAll(".punto");
+      puntos=document.querySelectorAll(".punto"),
+      btnSubir=document.querySelector(".btnSubir"),
+      btnBajar=document.querySelector(".btnBajar");
 
 let segundos,
     temporizador;
@@ -37,6 +39,8 @@ btnAlarma.addEventListener("click",e=>{
     btnAlarma.classList.add("btnImpTemAlar");
     btnTempo.classList.remove("btnImpTemAlar");
     borrarReloj();
+
+
 });
 
 btnTempo.addEventListener("click",e=>{
@@ -44,6 +48,8 @@ btnTempo.addEventListener("click",e=>{
     btnAlarma.classList.remove("btnImpTemAlar");
     btnTempo.classList.add("btnImpTemAlar");
     borrarReloj();
+
+
 });
 
 
