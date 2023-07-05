@@ -1,3 +1,4 @@
+/*Zona variable - constantes*/
 const btnReloj=document.querySelector(".btnReloj"),
       btnTempo=document.querySelector(".btnTempo"),
       btnAlarma=document.querySelector(".btnAlarma"),
@@ -13,14 +14,29 @@ const pos1=document.querySelector(".pos1"),
       pos4=document.querySelector(".pos4");
 
 let segundos,
-    temporizador;
+    temporizador,
+    temporizador2,
+    etapa=0;
 
-    
 
+/*Zona Eventos*/   
+btnReloj.addEventListener("click",funcionamientoReloj);
+btnAlarma.addEventListener("click",e=>alarma);
+btnTempo.addEventListener("click",cronometro);
 
-
-btnReloj.addEventListener("click",e=>{
+/*Zona funciones*/
+function reloj(){
+    let tiempo=new Date(),
+        horas=tiempo.getHours().toString(),
+        minutos=tiempo.getMinutes().toString();
+        segundos=tiempo.getSeconds();
+        minutos=((minutos.length<=1)?"0".concat(minutos):minutos).split("");
+        horas=((horas.length<=1)?"0".concat(horas):horas).split("");
+        return horas.concat(minutos);
+}
+function funcionamientoReloj(){
     borrarReloj();
+    btnParo.removeEventListener("click",crono);
     btnReloj.classList.add("btnImpTemAlar");
     btnAlarma.classList.remove("btnImpTemAlar");
     btnTempo.classList.remove("btnImpTemAlar");
@@ -39,35 +55,84 @@ btnReloj.addEventListener("click",e=>{
         });
         parpadeo(segundos);
     },1000);
-});
-
-btnAlarma.addEventListener("click",e=>{
-    btnReloj.classList.remove("btnImpTemAlar");
-    btnAlarma.classList.add("btnImpTemAlar");
-    btnTempo.classList.remove("btnImpTemAlar");
-    borrarReloj();
-    console.log("Estas en el temporizador");
-
-    
-    
-});
-
-btnTempo.addEventListener("click",e=>{
+}
+function cronometro(){
     btnReloj.classList.remove("btnImpTemAlar");
     btnAlarma.classList.remove("btnImpTemAlar");
     btnTempo.classList.add("btnImpTemAlar");
     borrarReloj();
     let etapa=0;
     inicialNumero();
-    btnParo.addEventListener("click",e=>{
+    btnParo.addEventListener("click",crono);
+}
+function crono(){
         etapa++;
-        tempo(etapa);
-        console.log(etapa);
+        accionCrono(etapa);
         if(etapa==3)etapa=0;
-    })
-
+}
+function accionCrono(etapa){
+    let arr=[0,0,0,0];
+    if(etapa==1){
+        //iniciar temporizador
+        btnReloj.removeEventListener("click",funcionamientoReloj);
+        btnTempo.removeEventListener("click",cronometro);
+        temporizador2=setInterval(e=>{
+            borrarNumero(3);
+            arr[3]++;
+            if(arr[3]>9){
+              borrarNumero(2);
+              arr[3]=0;
+              arr[2]++;
+              if(arr[2]>9){
+                borrarNumero(1);
+                    arr[2]=0;
+                    arr[1]++;
+                    if(arr[1]>9){
+                        borrarNumero(0);
+                        arr[1]=0;
+                        arr[0]++;
+                        if(arr[0]==5){
+                            clearInterval(temporizador2);
+                        }
+                    }
+                }
+            }
+            arr.forEach((e,i,arr)=>{
+                let numPint=obtenerNumero(e);
+                pintarNumero(numPint,i);
+            })
+            if(arr[3]%2==0){
+                for(let i=0;i<2;i++){
+                    puntos[i].style.opacity="1";
+                }
+            }else{
+                for(let i=0;i<2;i++){
+                    puntos[i].removeAttribute("style");
+                }
+            }
+        },1000);
+    }else if(etapa==2){
+        //parar temporizador
+        clearInterval(temporizador2);
+    }else if(etapa==3){
+        //reiniciar temporizador
+        inicialNumero();
+        btnReloj.addEventListener("click",funcionamientoReloj);
+        btnTempo.addEventListener("click",cronometro);
+    }
     
-});
+}
+function alarma(){
+    borrarReloj();
+
+    btnParo.removeEventListener("click",tempo);
+    
+    btnReloj.classList.remove("btnImpTemAlar");
+    btnAlarma.classList.add("btnImpTemAlar");
+    btnTempo.classList.remove("btnImpTemAlar");
+    borrarReloj();
+    console.log("Estas en el temporizador");
+}
 function parpadeo(seg){
     if(seg%2==0){
         for(let i=0;i<2;i++){
@@ -90,15 +155,6 @@ function borrarReloj(){
         puntos[i].removeAttribute("style");
     }
 }
-function reloj(){
-    let tiempo=new Date(),
-        horas=tiempo.getHours().toString(),
-        minutos=tiempo.getMinutes().toString();
-        segundos=tiempo.getSeconds();
-        minutos=((minutos.length<=1)?"0".concat(minutos):minutos).split("");
-        horas=((horas.length<=1)?"0".concat(horas):horas).split("");
-        return horas.concat(minutos);
-}
 function obtenerNumero (num){
     const objNum={
         0:[0,1,2,3,4,5],
@@ -118,13 +174,11 @@ function pintarNumero(arr,i){
     arr.forEach(e=>{
         num[i].children[e].style.opacity="1";
     })
-
 }
 function borrarNumero(dig){
     for(let o=0;o<7;o++){
         num[dig].children[o].removeAttribute("style");
     }
-    
 }
 function inicialNumero(){
     let arr=[0,0,0,0];
@@ -138,52 +192,4 @@ function inicialNumero(){
     for(let i=0;i<2;i++){
         puntos[i].style.opacity="1";
     }
-}
-function tempo(etapa){
-    let arr=[0,0,0,0];
-    if(etapa==1){
-        //iniciar temporizador
-        temporizador=setInterval(e=>{
-            borrarNumero(3);
-            arr[3]++;
-            if(arr[3]>9){
-              borrarNumero(2);
-              arr[3]=0;
-              arr[2]++;
-              if(arr[2]>9){
-                borrarNumero(1);
-                    arr[2]=0;
-                    arr[1]++;
-                    if(arr[1]>9){
-                        borrarNumero(0);
-                        arr[1]=0;
-                        arr[0]++;
-                        if(arr[0]==5){
-                            clearInterval(temporizador);
-                        }
-                    }
-                }
-            }
-            arr.forEach((e,i,arr)=>{
-                let numPint=obtenerNumero(e);
-                pintarNumero(numPint,i);
-            })
-            if(arr[3]%2==0){
-                for(let i=0;i<2;i++){
-                    puntos[i].style.opacity="1";
-                }
-            }else{
-                for(let i=0;i<2;i++){
-                    puntos[i].removeAttribute("style");
-                }
-            }
-        },1000);
-    }else if(etapa==2){
-        //parar temporizador
-        clearInterval(temporizador);
-    }else if(etapa==3){
-        //reiniciar temporizador
-        inicialNumero()
-    }
-    
 }
