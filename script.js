@@ -48,26 +48,7 @@ btnAlarma.addEventListener("click",e=>{
     borrarReloj();
     console.log("Estas en el temporizador");
 
-    pos1.addEventListener("click",e=>{
-        console.log(e);
-        let position=0;  
-        seleccionNumero(position);      
-    });
-    pos2.addEventListener("click",e=>{
-        console.log(e);
-        let position=21;
-        seleccionNumero(position);
-    })
-    pos3.addEventListener("click",e=>{
-        console.log(e);
-        let position=2;
-        seleccionNumero(position);
-    });
-    pos4.addEventListener("click",e=>{
-        console.log(e);
-        let position=3;
-        seleccionNumero(position);
-    });
+    
     
 });
 
@@ -79,9 +60,10 @@ btnTempo.addEventListener("click",e=>{
     let etapa=0;
     inicialNumero();
     btnParo.addEventListener("click",e=>{
-        if(etapa==3)etapa=0;
         etapa++;
         tempo(etapa);
+        console.log(etapa);
+        if(etapa==3)etapa=0;
     })
 
     
@@ -186,7 +168,6 @@ function tempo(etapa){
                 let numPint=obtenerNumero(e);
                 pintarNumero(numPint,i);
             })
-            console.log(arr[0]%2==0)
             if(arr[3]%2==0){
                 for(let i=0;i<2;i++){
                     puntos[i].style.opacity="1";
