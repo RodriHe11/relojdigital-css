@@ -16,12 +16,14 @@ const pos1=document.querySelector(".pos1"),
 let segundos,
     temporizador,
     temporizador2,
-    etapa=0;
+    etapa=0,
+    numero=0,
+    digitoAlarm=[0,0,0,0];
 
 
 /*Zona Eventos*/   
 btnReloj.addEventListener("click",funcionamientoReloj);
-btnAlarma.addEventListener("click",e=>alarma);
+btnAlarma.addEventListener("click",alarma);
 btnTempo.addEventListener("click",cronometro);
 
 /*Zona funciones*/
@@ -76,6 +78,7 @@ function accionCrono(etapa){
         //iniciar temporizador
         btnReloj.removeEventListener("click",funcionamientoReloj);
         btnTempo.removeEventListener("click",cronometro);
+        btnAlarma.removeEventListener("click",alarma);
         temporizador2=setInterval(e=>{
             borrarNumero(3);
             arr[3]++;
@@ -119,18 +122,42 @@ function accionCrono(etapa){
         inicialNumero();
         btnReloj.addEventListener("click",funcionamientoReloj);
         btnTempo.addEventListener("click",cronometro);
+        btnAlarma.addEventListener("click",alarma);
     }
     
 }
 function alarma(){
-    borrarReloj();
-
-    btnParo.removeEventListener("click",tempo);
-    
+    btnParo.removeEventListener("click",crono);
     btnReloj.classList.remove("btnImpTemAlar");
-    btnAlarma.classList.add("btnImpTemAlar");
     btnTempo.classList.remove("btnImpTemAlar");
+    btnAlarma.classList.add("btnImpTemAlar");
     borrarReloj();
+    inicialNumero();
+    pos1.addEventListener("click",e=>{
+        console.log("primero");
+        btnSubir.addEventListener("click",sumarNumero(0));
+        btnBajar.addEventListener("click",restarNumero(0));
+    });
+    pos2.addEventListener("click",e=>{
+        console.log("segundo");
+        btnSubir.addEventListener("click",sumarNumero(1));
+        btnBajar.addEventListener("click",restarNumero(1));
+    });
+    pos3.addEventListener("click",e=>{
+        console.log("tercero");
+        btnSubir.addEventListener("click",sumarNumero(2));
+        btnBajar.addEventListener("click",restarNumero(2));
+    });
+    pos4.addEventListener("click",e=>{
+        console.log("cuarto");
+        btnSubir.addEventListener("click",sumarNumero(3));
+        btnBajar.addEventListener("click",restarNumero(3));
+    });
+
+    
+
+
+    
     console.log("Estas en el temporizador");
 }
 function parpadeo(seg){
@@ -192,4 +219,44 @@ function inicialNumero(){
     for(let i=0;i<2;i++){
         puntos[i].style.opacity="1";
     }
+}
+function sumarNumero(pos){
+    numero=0;
+    if(pos==0){
+        if(numero<2){
+            numero++;
+            digitoAlarm[pos]=numero;
+        }
+    }else if(pos==1){
+        if(digitoAlarm[0]==2 && numero<4){
+            numero++;
+            digitoAlarm[pos]==numero;
+        }
+    }else if(pos==2){
+        if(digitoAlarm[0]==2 && digitoAlarm[1]==4){
+            digitoAlarm[pos]=numero;
+        }else if(numero <6){
+            numero++;
+            digitoAlarm[pos]==numero;
+        }
+    }else if(pos==3){
+        if(digitoAlarm[0]==2 && digitoAlarm[1]==4 || digitoAlarm[2]==6){
+            digitoAlarm[pos]=numero;
+        }else{
+            numero++;
+            digitoAlarm[pos]=numero;
+        }
+    }
+    borrarNumero(pos);
+    let dig=obtenerNumero(numero);
+    pintarNumero(dig,pos);
+}
+function restarNumero(pos){
+    if(numero>0){
+        numero--;
+        digitoAlarm[pos]=numero;
+    }
+    borrarNumero(pos);
+    let dig=obtenerNumero(numero);
+    pintarNumero(dig,pos);
 }
