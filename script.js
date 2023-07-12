@@ -221,6 +221,7 @@ function inicialNumero(){
     }
 }
 function sumarNumero(pos){
+    console.log("sumando")
     numero=0;
     if(pos==0){
         if(numero<2){
@@ -252,6 +253,7 @@ function sumarNumero(pos){
     pintarNumero(dig,pos);
 }
 function restarNumero(pos){
+    console.log("restando")
     if(numero>0){
         numero--;
         digitoAlarm[pos]=numero;
